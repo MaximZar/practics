@@ -1,5 +1,6 @@
 public class Practic1 {
     public void Practic1() {
+        System.out.println("Практическая работа №1:");
         System.out.println("Задача №1(-9, 45): " + remainder(-9, 45));
         System.out.println("Задача №2(7, 4): " + triArea(7, 4));
         System.out.println("Задача №3(2, 3, 5): " + animals(2, 3, 5));
