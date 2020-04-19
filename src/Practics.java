@@ -12,5 +12,10 @@ public class Practics {
 
         Practic3 pr3 = new Practic3();
         pr3.Practic3();
+
+        System.out.println();
+
+        Practic4 pr4 = new Practic4();
+        pr4.Practic4();
     }
 }
