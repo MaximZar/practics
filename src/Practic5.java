@@ -15,6 +15,10 @@ public class Practic5 {
     System.out.println("\tладья \tA8 \tH8: \t" + canMove("ладья", "A8", "H8"));
     System.out.println("\tферзь \tF5 \tD4: \t" + canMove("ферзь", "F5", "D4"));
     System.out.println("\tкороль\tC4 \tD5: \t" + canMove("король", "C4", "D5"));
+
+    System.out.println("Задача №3: ");
+    System.out.println("\tbutl, beautiful: " + canComplete("butl", "beautiful"));
+    System.out.println("\ttulb, beautiful: " + canComplete("tulb", "beautiful"));
     // System.out.println("Задача №(): " + ());
     
   }
@@ -84,5 +88,19 @@ public class Practic5 {
         return ((horizontal && vertical) || diagonal) && stop;
     }
     return false;
+  }
+  private boolean canComplete(String preWord, String line) {
+    for (int i = 0; i < line.length(); i += 1) {
+      if (preWord.length() == 0) {
+        return false;
+      }
+      if (preWord.substring(0, 1).equals(line.substring(i, i + 1))) {
+        preWord = preWord.substring(1); 
+      }
+    }
+    if (preWord.length() != 0) {
+      return false;
+    }
+    return true;
   }
 }
