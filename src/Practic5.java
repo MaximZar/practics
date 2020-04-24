@@ -1,4 +1,4 @@
-import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -44,6 +44,9 @@ public class Practic5 {
     System.out.println("\t19: \t" + numToLang(19, "ru"));
     System.out.println("\t286: \t" + numToLang(286, "ru"));
     System.out.println("\t3: \t" + numToLang(3, "ru"));
+
+    System.out.println("Задача №8: ");
+    System.out.println("\tpassword123: " + getSha256Hash("password123"));
     // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
@@ -325,5 +328,20 @@ public class Practic5 {
     }
     result += figureToLang(numberS, lang);
     return result;
+  }
+  private String getSha256Hash(String line) {
+    try {
+      MessageDigest digest = MessageDigest.getInstance("SHA-256");
+      byte[] futHash = digest.digest(line.getBytes("UTF-8"));
+      String hexStr = new String();
+      for (int i = 0; i < futHash.length; i++) {
+          String hex = Integer.toHexString(0xff & futHash[i]);
+          if(hex.length() == 1) hexStr += "0";
+          hexStr += hex;
+      }
+      return hexStr;
+    } catch(Exception ex) {
+      throw new RuntimeException(ex);
+   }
   }
 }
