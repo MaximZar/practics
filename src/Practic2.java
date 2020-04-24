@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.lang.String;
 
 public class Practic2 {
-    public void Practic2() {
+    public Practic2() {
         System.out.println("Практическая работа №2:");
 
         System.out.println("Задача №1(\"hello\", 3): " + repeat("hello", 3));

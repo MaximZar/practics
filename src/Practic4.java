@@ -1,5 +1,5 @@
 public class Practic4 {
-  public void Practic4() {
+  public Practic4() {
     System.out.println("Практическая работа №4:");
 
     System.out.println("Задача №1(20, \"10,7 hello my name is Bessie and this is my essay➞\"): " + textProcess(20, "10,7 hello my name is Bessie and this is my essay➞"));

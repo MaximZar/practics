@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Practic5 {
-  public void Practic5() {
+  public Practic5() {
     
     System.out.println("Практическая работа №5:");
     
@@ -50,10 +50,11 @@ public class Practic5 {
     
     System.out.println("Задача №9: ");
     System.out.println("\tjOn SnoW, kINg IN thE noRth.: \t" + correctTitle("jOn SnoW, kINg IN thE noRth."));
-    System.out.println("\tsansa stark, lady of winterfell.: \t" + correctTitle("sansa stark, lady of winterfell."));
-    // System.out.println("\t: " + ());
-    // System.out.println("Задача №(): " + ());
-    
+    System.out.println("\tsandsa-stark, lady of winterfell.: \t" + correctTitle("sandsa-stark, lady of winterfell."));
+
+    System.out.println("Задача №10: (1: 19, 2: 17)");
+    System.out.println(hexLattice(19));    
+    System.out.println(hexLattice(17));    
   }
   private String listToString(ArrayList<String> linkedList) {
     String value = "[ ";
@@ -376,6 +377,22 @@ public class Practic5 {
     String result = "";
     for (int i = 0; i < array.size(); i += 1) {
       result += array.get(i);
+    }
+    return result;
+  }
+  private String hexLattice(int count) {
+    if (count == 1) {
+      return "o";
+    }
+    if ((count - 1) % 6 != 0) {
+      return "Invalid";
+    }
+    String result = "";
+    int countLine = (count - 1) / 2;
+    for (int i = 1; i < countLine; i += 1) {
+      for (int j = 1; j < countLine; j += 1) {
+
+      }
     }
     return result;
   }

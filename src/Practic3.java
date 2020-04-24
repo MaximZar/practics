@@ -1,5 +1,5 @@
 public class Practic3 {
-    public void Practic3() {
+    public Practic3() {
         System.out.println("Практическая работа №3:");
 
         System.out.println("Задача №1(1, 0, 1): " + solution(1, 0, 1));
