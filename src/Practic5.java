@@ -52,9 +52,11 @@ public class Practic5 {
     System.out.println("\tjOn SnoW, kINg IN thE noRth.: \t" + correctTitle("jOn SnoW, kINg IN thE noRth."));
     System.out.println("\tsandsa-stark, lady of winterfell.: \t" + correctTitle("sandsa-stark, lady of winterfell."));
 
-    System.out.println("Задача №10: (1: 19, 2: 17)");
-    System.out.println(hexLattice(19));    
+    System.out.println("Задача №10: (1: 19, 2: 17, 3: 37)");
+    System.out.println(hexLattice(19));  
     System.out.println(hexLattice(17));    
+    System.out.println(hexLattice(37));    
+    System.out.println(hexLattice(7));    
   }
   private String listToString(ArrayList<String> linkedList) {
     String value = "[ ";
@@ -380,6 +382,13 @@ public class Practic5 {
     }
     return result;
   }
+  private int summHex(int countLine, int now) {
+    int summ = 0;
+    for (int i = now; i < countLine; i += 1) {
+      summ += i;
+    }
+    return summ;
+  }
   private String hexLattice(int count) {
     if (count == 1) {
       return "o";
@@ -387,13 +396,29 @@ public class Practic5 {
     if ((count - 1) % 6 != 0) {
       return "Invalid";
     }
-    String result = "";
-    int countLine = (count - 1) / 2;
-    for (int i = 1; i < countLine; i += 1) {
-      for (int j = 1; j < countLine; j += 1) {
-
+    int testCountLine = (count - 1) / 2;
+    int middleLine = 0;
+    int smallLine = 0;
+    for (int i = testCountLine - 1; i >= 1; i -= 1) {
+      for (int j = 1; j < i; j += 1) {
+        if (summHex(i, j) * 2 + i == count) {
+          middleLine = i;
+          smallLine = j;
+          break;
+        }
       }
     }
-    return result;
+    String upImage = "";
+    String downImage = "";
+    //рисуем
+    for (int i = smallLine; i < middleLine; i += 1) {
+      String leftSpace = " ".repeat(middleLine*2 - 1 - i);
+      String lineCenter = "o ".repeat(i);
+      upImage += leftSpace + lineCenter + "\n";
+      downImage = leftSpace + lineCenter + "\n" + downImage;
+    }
+    String middleImage = " ".repeat(middleLine - 1) + "o ".repeat(middleLine) + "\n";
+    String image = upImage + middleImage + downImage;
+    return image;
   }
 }
