@@ -38,9 +38,12 @@ public class Practic5 {
     System.out.println("\t1234567890123452: " + validateCard("1234567890123452"));
 
     System.out.println("Задача №7: ");
-    System.out.println("\t19: \t" + numToEng(19));
-    System.out.println("\t286: \t" + numToEng(286));
-    System.out.println("\t3: \t" + numToEng(3));
+    System.out.println("\t19: \t" + numToLang(19, "en"));
+    System.out.println("\t286: \t" + numToLang(286, "en"));
+    System.out.println("\t3: \t" + numToLang(3, "en"));
+    System.out.println("\t19: \t" + numToLang(19, "ru"));
+    System.out.println("\t286: \t" + numToLang(286, "ru"));
+    System.out.println("\t3: \t" + numToLang(3, "ru"));
     // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
@@ -200,78 +203,78 @@ public class Practic5 {
     }
     return false;
   }
-  private String figureToEng(String number) {
+  private String figureToLang(String number, String lang) {
     switch (number) {
       case "1":
-        return "one";
+        return lang == "ru" ? "один" : "one";
       case "2":
-        return "two";
+        return lang == "ru" ? "два" : "two";
       case "3":
-        return "three";
+        return lang == "ru" ? "три" : "three";
       case "4":
-        return "four";
+        return lang == "ru" ? "четыре" : "four";
       case "5":
-        return "five";
+        return lang == "ru" ? "пять" : "five";
       case "6":
-        return "six";
+        return lang == "ru" ? "шесть" : "six";
       case "7":
-        return "seven";
+        return lang == "ru" ? "семь" : "seven";
       case "8":
-        return "eight";
+        return lang == "ru" ? "восемь" : "eight";
       case "9":
-        return "nine";
+        return lang == "ru" ? "девять" : "nine";
       default:
         return "";
     }
   }
-  private String tenToEng(String number) {
+  private String tenToLang(String number, String lang) {
     switch (number) {
       case "2":
-        return "twenty";
+        return lang == "ru" ? "двадцать" : "twenty";
       case "3":
-        return "thirty";
+        return lang == "ru" ? "тридцать" : "thirty";
       case "4":
-        return "forty";
+        return lang == "ru" ? "сорок" : "forty";
       case "5":
-        return "fifty";
+        return lang == "ru" ? "пятьдесят" : "fifty";
       case "6":
-        return "sixty";
+        return lang == "ru" ? "шестьдесят" : "sixty";
       case "7":
-        return "seventy";
+        return lang == "ru" ? "семьдесят" : "seventy";
       case "8":
-        return "eighty";
+        return lang == "ru" ? "восемьдесят" : "eighty";
       case "9":
-        return "ninety";
+        return lang == "ru" ? "девяность" : "ninety";
       default:
       return "";
     }
   }
-  private String numToEng(int number) {
+  private String numToLang(int number, String lang) {
     if (number == 0) {
-      return "zero";
+      return lang == "ru" ? "ноль" : "zero";
     }
     if (number > 9 && number < 20) {
       switch (number) {
         case 10:
-          return "ten";
+          return lang == "ru" ? "десять" : "ten";
         case 11:
-          return "eleven";
+          return lang == "ru" ? "одиннадцать" : "eleven";
         case 12:
-          return "twelve";
+          return lang == "ru" ? "двенадцать" : "twelve";
         case 13:
-          return "thirteen";
+          return lang == "ru" ? "тринадцать" : "thirteen";
         case 14:
-          return "fourteen";
+          return lang == "ru" ? "четырнадцать" : "fourteen";
         case 15:
-          return "fifteen";
+          return lang == "ru" ? "пятнадцать" : "fifteen";
         case 16:
-          return "sixteen";
+          return lang == "ru" ? "шестнадцать" : "sixteen";
         case 17:
-          return "seventeen";
+          return lang == "ru" ? "семнадцать" : "seventeen";
         case 18:
-          return "eighteen";
+          return lang == "ru" ? "восемнадцать" : "eighteen";
         case 19:
-          return "nineteen";
+          return lang == "ru" ? "девятнадцать" : "nineteen";
         default:
           break;
       }
@@ -279,14 +282,48 @@ public class Practic5 {
     String result = "";
     String numberS = String.valueOf(number);
     if (number > 99) {
-      result = figureToEng(numberS.substring(0, 1)) + " hundred ";
+      if (lang == "ru") {
+        switch (numberS.substring(0, 1)) {
+          case "1":
+            result += "сто ";
+            break;
+          case "2":
+            result += "двести ";
+            break;
+          case "3":
+            result += "триста ";
+            break;
+          case "4":
+            result += "четыреста ";
+            break;
+          case "5":
+            result += "пятьсот ";
+            break;
+          case "6":
+            result += "шестьсот ";
+            break;
+          case "7":
+            result += "семьсот ";
+            break;
+          case "8":
+            result += "восемьсот ";
+            break;
+          case "9":
+            result += "девятьсот ";
+            break;
+          default:
+            result += "";
+        }
+      } else {
+        result = figureToLang(numberS.substring(0, 1), "en") + " hundred ";
+      }
       numberS = numberS.substring(1);
     }
     if (number > 9) {
-      result += tenToEng(numberS.substring(0, 1)) + " ";
+      result += tenToLang(numberS.substring(0, 1), lang) + " ";
       numberS = numberS.substring(1);
     }
-    result += figureToEng(numberS);
+    result += figureToLang(numberS, lang);
     return result;
   }
 }
