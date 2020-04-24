@@ -52,11 +52,12 @@ public class Practic5 {
     System.out.println("\tjOn SnoW, kINg IN thE noRth.: \t" + correctTitle("jOn SnoW, kINg IN thE noRth."));
     System.out.println("\tsandsa-stark, lady of winterfell.: \t" + correctTitle("sandsa-stark, lady of winterfell."));
 
-    System.out.println("Задача №10: (1: 19, 2: 17, 3: 37)");
-    System.out.println(hexLattice(19));  
+    System.out.println("Задача №10: (1: 17, 2: 7, 3: 19, 4: 37, 5: 49)");
     System.out.println(hexLattice(17));    
+    System.out.println(hexLattice(7));     
+    System.out.println(hexLattice(19));  
     System.out.println(hexLattice(37));    
-    System.out.println(hexLattice(7));    
+    System.out.println(hexLattice(49));   
   }
   private String listToString(ArrayList<String> linkedList) {
     String value = "[ ";
@@ -399,7 +400,7 @@ public class Practic5 {
     int testCountLine = (count - 1) / 2;
     int middleLine = 0;
     int smallLine = 0;
-    for (int i = testCountLine - 1; i >= 1; i -= 1) {
+    for (int i = testCountLine; i >= 1; i -= 1) {
       for (int j = 1; j < i; j += 1) {
         if (summHex(i, j) * 2 + i == count) {
           middleLine = i;

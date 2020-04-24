@@ -23,5 +23,6 @@ public class Practics {
             default:
                 System.out.println("Такой практики нет"); 
         }
+        in.close();
     }
 }
