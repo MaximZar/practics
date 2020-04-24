@@ -1,11 +1,20 @@
 import java.util.Arrays;
+
 public class Practic5 {
   public void Practic5() {
+    
     System.out.println("Практическая работа №5:");
-
+    
     int[] firstSolution = encrypt("Hi there!");
     System.out.println("Задача №1('Hi there!'): " + arrayToString(firstSolution) + " " + decrypt(firstSolution));
-    // System.out.println("Задача №2(): " + ());
+    
+    System.out.println("Задача №2: ");
+    System.out.println("\tпешка \tA6 \tA7: \t" + canMove("пешка", "A6", "A7"));
+    System.out.println("\tконь \tC7 \tA6: \t" + canMove("конь", "C7", "A6"));
+    System.out.println("\tслон \tA7 \tG2: \t" + canMove("слон", "A7", "G2"));
+    System.out.println("\tладья \tA8 \tH8: \t" + canMove("ладья", "A8", "H8"));
+    System.out.println("\tферзь \tF5 \tD4: \t" + canMove("ферзь", "F5", "D4"));
+    System.out.println("\tкороль\tC4 \tD5: \t" + canMove("король", "C4", "D5"));
     // System.out.println("Задача №(): " + ());
     
   }
@@ -30,5 +39,50 @@ public class Practic5 {
   private String arrayToString(int[] array) {
     return Arrays.toString(array);
   }
-
+  private boolean canMove(String figure, String position, String futurePosition) {
+    int letter = "ABCDEFGH".indexOf(position.charAt(0)) + 1;
+    int number = Character.getNumericValue(position.charAt(1)); 
+    int fLetter = "ABCDEFGH".indexOf(futurePosition.charAt(0)) + 1;
+    int fNumber = Character.getNumericValue(futurePosition.charAt(1)); 
+    boolean horizontal;
+    boolean vertical;
+    boolean diagonal;
+    boolean stop;
+    // ^ - исключающее или 
+    switch (figure) {
+      case "пешка":
+        horizontal = fLetter - letter == 0;
+        vertical = fNumber - number == 1;
+        stop = fNumber < 9;
+        return horizontal && vertical && stop;
+      case "конь":
+        int first = Math.abs(fLetter - letter);
+        int second = Math.abs(fNumber - number);
+        diagonal = (first == 1 && second == 2) ^ (first == 2 && second == 1);
+        stop = fLetter < 9 && fNumber < 9;
+        return diagonal && stop;
+      case "слон":
+        diagonal = Math.abs(fLetter - letter) == Math.abs(fNumber - number);
+        stop = fLetter < 9 && fNumber < 9;
+        return diagonal && stop;
+      case "ладья":
+        horizontal = Math.abs(fLetter - letter) > 0;
+        vertical = Math.abs(fNumber - number) > 0;
+        stop = fLetter < 9 && fNumber < 9;
+        return (horizontal ^ vertical) && stop;
+      case "ферзь":
+        diagonal = fLetter - letter == fNumber - number;
+        horizontal = Math.abs(fLetter - letter) > 0;
+        vertical = Math.abs(fNumber - number) > 0;
+        stop = fLetter < 9 && fNumber < 9;
+        return ((horizontal ^ vertical) || diagonal) && stop;
+      case "король":
+        diagonal = (Math.abs(fLetter - letter) == 1) && (Math.abs(fNumber - number) == 1);
+        horizontal = Math.abs(fLetter - letter) == 1;
+        vertical = Math.abs(fNumber - number) == 1;
+        stop = fLetter < 9 && fNumber < 9;
+        return ((horizontal && vertical) || diagonal) && stop;
+    }
+    return false;
+  }
 }
