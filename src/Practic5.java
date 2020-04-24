@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +32,10 @@ public class Practic5 {
     String[] solution42 = new String[]{"many", "carriage", "emit", "apricot", "animal"};
     System.out.println("\t[toe, ocelot, maniac]: " + sameVowelGroup(solution41));
     System.out.println("\t[many, carriage, emit, apricot, animal]: " + sameVowelGroup(solution42));
+
+    System.out.println("Задача №6: ");
+    System.out.println("\t1234567890123456: " + validateCard("1234567890123456"));
+    System.out.println("\t1234567890123452: " + validateCard("1234567890123452"));
     // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
@@ -157,5 +162,37 @@ public class Practic5 {
     }
     return listToString(arrayList);
   }
-
+  private boolean validateCard(String card) {
+    if (card.length() < 14 || card.length() > 19) {
+      return false;
+    }
+    int control = Integer.parseInt(card.substring(card.length() - 1));
+    card = card.substring(0, card.length() - 1);
+    String result = "";
+    // 2
+    for (int i = card.length() - 1; i >= 0; i -= 1) {
+      result += card.substring(i, i + 1);
+    }
+    // 3-4
+    int sum = 0;
+    for (int i = 0; i < result.length(); i += 1) {
+      if (i % 2 == 1) { 
+        int doubleFigure = Integer.parseInt(result.substring(i, i + 1)) * 2;
+        if (doubleFigure > 9) {
+          int first = Integer.parseInt(String.valueOf(doubleFigure).substring(0, 1));
+          int second = Integer.parseInt(String.valueOf(doubleFigure).substring(1, 2));
+          doubleFigure = first + second;
+        }
+        sum += doubleFigure;
+      } else {
+        sum += Integer.parseInt(result.substring(i, i + 1));
+      }
+    }
+    // 4
+    String summer = String.valueOf(sum);
+    if (10 - Character.getNumericValue(summer.charAt(summer.length() - 1)) == control) {
+      return true;
+    }
+    return false;
+  }
 }
