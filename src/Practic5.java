@@ -26,12 +26,21 @@ public class Practic5 {
     System.out.println("\t0: " + sumDigProd(0));
     System.out.println("\t1, 2, 3, 4, 5, 6: " + sumDigProd(1, 2, 3, 4, 5, 6));
 
-    System.out.println("Задача №4: ");
-    System.out.println("\t[toe, ocelot, maniac]: " + sameVowelGroup({"toe", "ocelot", "maniac"}));
-    System.out.println("\t[many, carriage, emit, apricot, animal]: " + sameVowelGroup({"many", "carriage", "emit", "apricot", "animal"}));
+    System.out.println("Задача №5: ");
+    String[] solution41 = new String[]{"toe", "ocelot", "maniac"};
+    String[] solution42 = new String[]{"many", "carriage", "emit", "apricot", "animal"};
+    System.out.println("\t[toe, ocelot, maniac]: " + sameVowelGroup(solution41));
+    System.out.println("\t[many, carriage, emit, apricot, animal]: " + sameVowelGroup(solution42));
     // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
+  }
+  private String listToString(ArrayList<String> linkedList) {
+    String value = "[ ";
+    for(int i = 0; i < linkedList.size(); i+= 1) {
+      value += (String) linkedList.get(i) + " ";
+    }
+    return value + "]";
   }
   private int[] encrypt(String line) {
     int[] code = new int [line.length()];
@@ -137,7 +146,7 @@ public class Practic5 {
     }
     return vowels;
   }
-  private ArrayList<String> sameVowelGroup(String[] vals) {
+  private String sameVowelGroup(String[] vals) {
     ArrayList<String> arrayList = new ArrayList<>();
     String vowels = getVowels(vals[0]);
     for (int i = 0; i < vals.length; i += 1) {
@@ -146,7 +155,7 @@ public class Practic5 {
         arrayList.add(vals[i]);
       }
     }
-    return arrayList;
+    return listToString(arrayList);
   }
 
 }
