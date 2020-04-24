@@ -36,6 +36,11 @@ public class Practic5 {
     System.out.println("Задача №6: ");
     System.out.println("\t1234567890123456: " + validateCard("1234567890123456"));
     System.out.println("\t1234567890123452: " + validateCard("1234567890123452"));
+
+    System.out.println("Задача №7: ");
+    System.out.println("\t19: \t" + numToEng(19));
+    System.out.println("\t286: \t" + numToEng(286));
+    System.out.println("\t3: \t" + numToEng(3));
     // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
@@ -194,5 +199,94 @@ public class Practic5 {
       return true;
     }
     return false;
+  }
+  private String figureToEng(String number) {
+    switch (number) {
+      case "1":
+        return "one";
+      case "2":
+        return "two";
+      case "3":
+        return "three";
+      case "4":
+        return "four";
+      case "5":
+        return "five";
+      case "6":
+        return "six";
+      case "7":
+        return "seven";
+      case "8":
+        return "eight";
+      case "9":
+        return "nine";
+      default:
+        return "";
+    }
+  }
+  private String tenToEng(String number) {
+    switch (number) {
+      case "2":
+        return "twenty";
+      case "3":
+        return "thirty";
+      case "4":
+        return "forty";
+      case "5":
+        return "fifty";
+      case "6":
+        return "sixty";
+      case "7":
+        return "seventy";
+      case "8":
+        return "eighty";
+      case "9":
+        return "ninety";
+      default:
+      return "";
+    }
+  }
+  private String numToEng(int number) {
+    if (number == 0) {
+      return "zero";
+    }
+    if (number > 9 && number < 20) {
+      switch (number) {
+        case 10:
+          return "ten";
+        case 11:
+          return "eleven";
+        case 12:
+          return "twelve";
+        case 13:
+          return "thirteen";
+        case 14:
+          return "fourteen";
+        case 15:
+          return "fifteen";
+        case 16:
+          return "sixteen";
+        case 17:
+          return "seventeen";
+        case 18:
+          return "eighteen";
+        case 19:
+          return "nineteen";
+        default:
+          break;
+      }
+    }
+    String result = "";
+    String numberS = String.valueOf(number);
+    if (number > 99) {
+      result = figureToEng(numberS.substring(0, 1)) + " hundred ";
+      numberS = numberS.substring(1);
+    }
+    if (number > 9) {
+      result += tenToEng(numberS.substring(0, 1)) + " ";
+      numberS = numberS.substring(1);
+    }
+    result += figureToEng(numberS);
+    return result;
   }
 }
