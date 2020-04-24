@@ -47,6 +47,10 @@ public class Practic5 {
 
     System.out.println("Задача №8: ");
     System.out.println("\tpassword123: " + getSha256Hash("password123"));
+    
+    System.out.println("Задача №9: ");
+    System.out.println("\tjOn SnoW, kINg IN thE noRth.: \t" + correctTitle("jOn SnoW, kINg IN thE noRth."));
+    System.out.println("\tsansa stark, lady of winterfell.: \t" + correctTitle("sansa stark, lady of winterfell."));
     // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
@@ -343,5 +347,36 @@ public class Practic5 {
     } catch(Exception ex) {
       throw new RuntimeException(ex);
    }
+  }
+  private String correctTitle(String line) {
+    line = line.toLowerCase();
+    String letters = "abcdefghijklmnopqrstuvwxyz";
+    String word = "";
+    ArrayList<String> array = new ArrayList<>();
+    for (int i = 0; i < line.length(); i += 1) {
+      if (!letters.contains(line.substring(i, i+1))) {
+        if (word == "") {
+          array.add(line.substring(i, i+1));
+        } else {
+          array.add(word);
+          array.add(line.substring(i, i+1));
+          word = "";
+        }
+      } else {
+        word += line.substring(i, i+1);
+      }
+    }
+    for (int i = 0; i < array.size(); i += 1) {
+      String wordToBig = array.get(i);
+      if (!wordToBig.equals("and") && !wordToBig.equals("the") && !wordToBig.equals("of") && !wordToBig.equals("in")) {
+        wordToBig = wordToBig.substring(0, 1).toUpperCase() + wordToBig.substring(1);
+        array.set(i, wordToBig);
+      }
+    }
+    String result = "";
+    for (int i = 0; i < array.size(); i += 1) {
+      result += array.get(i);
+    }
+    return result;
   }
 }
