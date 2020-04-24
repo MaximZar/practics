@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Practic5 {
@@ -19,6 +20,16 @@ public class Practic5 {
     System.out.println("Задача №3: ");
     System.out.println("\tbutl, beautiful: " + canComplete("butl", "beautiful"));
     System.out.println("\ttulb, beautiful: " + canComplete("tulb", "beautiful"));
+
+    System.out.println("Задача №4: ");
+    System.out.println("\t16, 28: " + sumDigProd(16, 28));
+    System.out.println("\t0: " + sumDigProd(0));
+    System.out.println("\t1, 2, 3, 4, 5, 6: " + sumDigProd(1, 2, 3, 4, 5, 6));
+
+    System.out.println("Задача №4: ");
+    System.out.println("\t[toe, ocelot, maniac]: " + sameVowelGroup({"toe", "ocelot", "maniac"}));
+    System.out.println("\t[many, carriage, emit, apricot, animal]: " + sameVowelGroup({"many", "carriage", "emit", "apricot", "animal"}));
+    // System.out.println("\t: " + ());
     // System.out.println("Задача №(): " + ());
     
   }
@@ -103,4 +114,39 @@ public class Practic5 {
     }
     return true;
   }
+  private int sumDigProd(int ... vals) {
+    int result = 0;
+    for (int i = 0; i < vals.length; i += 1) {
+      result += vals[i];
+    }
+    while (String.valueOf(result).length() > 1) {
+      int val = 1;
+      for (int i = 0; i < String.valueOf(result).length(); i += 1) {
+        val *= Character.getNumericValue(String.valueOf(result).charAt(i));
+      }
+      result = val;
+    }
+    return result;
+  }
+  private String getVowels(String val) {
+    String vowels = "";
+    for (int i = 0; i < val.length(); i += 1) {
+      if ("AEIOUaeiou".contains(val.substring(i, i + 1))) {
+        vowels += val.substring(i, i + 1);
+      }
+    }
+    return vowels;
+  }
+  private ArrayList<String> sameVowelGroup(String[] vals) {
+    ArrayList<String> arrayList = new ArrayList<>();
+    String vowels = getVowels(vals[0]);
+    for (int i = 0; i < vals.length; i += 1) {
+      String wordVowels = getVowels(vals[i]);
+      if (vowels.equals(wordVowels)) {
+        arrayList.add(vals[i]);
+      }
+    }
+    return arrayList;
+  }
+
 }
