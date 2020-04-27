@@ -46,6 +46,12 @@ public class Practic6 {
     System.out.println("\t16: " + convertToRoman(16));
     System.out.println("\t2765: " + convertToRoman(2765));
     System.out.println("\t3999: " + convertToRoman(3999));
+
+    System.out.println("Задача №9: ");
+    System.out.println("\t6 * 4 = 24: " + formula("6 * 4 = 24"));
+    System.out.println("\t18 / 17 = 2: " + formula("18 / 17 = 2"));
+    System.out.println("\t16 * 10 = 160 = 14 + 120: " + formula("16 * 10 = 160 = 14 + 120"));
+    
     // System.out.println("\t: \t" + ());
   }
   private int bell(int n) {
@@ -272,5 +278,37 @@ public class Practic6 {
       index += 1;
     }
     return result;
+  }
+  private double solution(String[] solution) {
+    double num = Double.valueOf(solution[0]);
+    for (int j = 1; j < solution.length; j += 1) {
+      switch (solution[j]) {
+        case "+":
+          num += Double.valueOf(solution[j + 1]);
+          break;
+        case "-":
+          num -= Double.valueOf(solution[j + 1]);
+          break;
+        case "*":
+          num *= Double.valueOf(solution[j + 1]);
+          break;
+        case "/":
+          num /= Double.valueOf(solution[j + 1]);
+          break;
+      }
+      j += 1;
+    }
+    return num;
+  }
+  private boolean formula(String line) {
+    String[] computation = line.split("=");
+    double firstSolution = solution(computation[0].trim().split(" "));
+    for (int i = 1; i < computation.length; i += 1) {
+      double num = solution(computation[i].trim().split(" "));
+      if (firstSolution != num){
+        return false;
+      }
+    }
+    return true;
   }
 }
