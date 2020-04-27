@@ -12,6 +12,13 @@ public class Practic6 {
     System.out.println("\tApple: \t" + translateWord("Apple"));
     System.out.println("\t'I like to eat honey waffles.': " + translateSentence("I like to eat honey waffles."));
     System.out.println("\t'Do you think it is going to rain today?': " + translateSentence("Do you think it is going to rain today?"));
+    
+    System.out.println("Задача №3: ");
+    System.out.println("\trgb(0,0,0): \t" + validColor("rgb(0,0,0)"));
+    System.out.println("\trgb(0,,0): \t" + validColor("rgb(0,,0)"));
+    System.out.println("\trgb(255,256,255): \t" + validColor("rgb(255,256,255)"));
+    System.out.println("\trgba(0,0,0,0.123456789): \t" + validColor("rgba(0,0,0,0.123456789)"));
+    // System.out.println("\t: \t" + ());
   }
   private int bell(int n) {
     //решено с помощью треугольника Пирса
@@ -70,5 +77,25 @@ public class Practic6 {
       }
     }
     return String.join(" ", resultSentence);
+  }
+  private boolean validColor(String color) {
+    String format = color.substring(0, color.indexOf("("));
+    String[] numbers = color.substring(color.indexOf("(") + 1, color.indexOf(")")).split(",");
+    for (int i = 0; i < numbers.length; i += 1) {
+      if (numbers[i].equals("")) return false;
+    }
+    boolean checkFirst = Integer.valueOf(numbers[0]) < 256 && Integer.valueOf(numbers[0]) >= 0;
+    boolean checkSecond = Integer.valueOf(numbers[1]) < 256 && Integer.valueOf(numbers[1]) >= 0;
+    boolean checkThirt = Integer.valueOf(numbers[2]) < 256 && Integer.valueOf(numbers[2]) >= 0;
+    switch (format) {
+      case "rgb":
+        if (numbers.length != 3) return false;
+        return checkFirst && checkSecond && checkThirt;
+      case "rgba":
+        if (numbers.length != 4) return false;
+        boolean checkFour = Double.valueOf(numbers[3]) >= 0 && Double.valueOf(numbers[3]) < 256;
+        return checkFirst && checkSecond && checkThirt && checkFour;
+    }
+    return false;
   }
 }
