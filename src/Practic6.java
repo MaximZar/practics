@@ -18,6 +18,11 @@ public class Practic6 {
     System.out.println("\trgb(0,,0): \t" + validColor("rgb(0,,0)"));
     System.out.println("\trgb(255,256,255): \t" + validColor("rgb(255,256,255)"));
     System.out.println("\trgba(0,0,0,0.123456789): \t" + validColor("rgba(0,0,0,0.123456789)"));
+
+    System.out.println("Задача №4: ");
+    System.out.println("\thttps://edabit.com?a=1&b=2&a=2: " + stripUrlParams("https://edabit.com?a=1&b=2&a=2"));
+    System.out.println("\thttps://edabit.com?a=1&b=2&a=2, ['b']: " + stripUrlParams("https://edabit.com?a=1&b=2&a=2", new String[]{"b"}));
+    System.out.println("\thttps://edabit.com, ['b']: " + stripUrlParams("https://edabit.com", new String[]{ "b" }));
     // System.out.println("\t: \t" + ());
   }
   private int bell(int n) {
@@ -97,5 +102,61 @@ public class Practic6 {
         return checkFirst && checkSecond && checkThirt && checkFour;
     }
     return false;
+  }
+  private String stripUrlParams(String site) {
+    if (!site.contains("?")) return site;
+    String[] resultArr = site.substring(site.indexOf("?") + 1).split("&");
+    String result = "";
+    for (int i = 0; i < resultArr.length; i += 1) {
+      // проверяем на повтор
+      for (int j = 0; j < i; j += 1) {
+        String last = resultArr[j].substring(0, resultArr[j].indexOf("="));
+        String now = resultArr[i].substring(0, resultArr[i].indexOf("="));
+        if (now.equals(last)) {
+          resultArr[j] = resultArr[i];
+          resultArr[i] = "";
+          break;
+        }
+      }
+    }
+    for (int i = 0; i < resultArr.length; i += 1) {
+      if (!resultArr[i].equals("")) {
+        result += resultArr[i] + "&";
+      }
+    }
+    result = result.charAt(result.length() - 1) == '&' ? result.substring(0, result.length() - 1) : result;
+    return site.substring(0, site.indexOf("?") + 1) + result;
+  }
+  private String stripUrlParams(String site, String[] paramsToStrip) {
+    if (!site.contains("?")) return site;
+    String[] resultArr = site.substring(site.indexOf("?") + 1).split("&");
+    String result = "";
+    for (int i = 0; i < resultArr.length; i += 1) {
+      // удаляем
+      for (int j = 0; j < paramsToStrip.length; j += 1) {
+        if (resultArr[i].substring(0, resultArr[i].indexOf("=")).equals(paramsToStrip[j])) {
+          resultArr[i] = "";
+          break;
+        }
+      }
+      // проверяем на повтор
+      for (int j = 0; j < i; j += 1) {
+        if (resultArr[i].equals("")) break;
+        String last = resultArr[j].substring(0, resultArr[j].indexOf("="));
+        String now = resultArr[i].substring(0, resultArr[i].indexOf("="));
+        if (now.equals(last)) {
+          resultArr[j] = resultArr[i];
+          resultArr[i] = "";
+          break;
+        }
+      }
+    }
+    for (int i = 0; i < resultArr.length; i += 1) {
+      if (!resultArr[i].equals("")) {
+        result += resultArr[i] + "&";
+      }
+    }
+    result = result.charAt(result.length() - 1) == '&' ? result.substring(0, result.length() - 1) : result;
+    return site.substring(0, site.indexOf("?") + 1) + result;
   }
 }
