@@ -33,6 +33,19 @@ public class Practic6 {
     System.out.println("\t4: \t" + ulam(4));
     System.out.println("\t9: \t" + ulam(9));
     System.out.println("\t206: \t" + ulam(206));
+
+    // System.out.println("Задача №7: ");
+    // System.out.println("\tabcabcbb: " + longestNonrepeatingSubstring("abcabcbb"));
+    // System.out.println("\taaaaaa: " + longestNonrepeatingSubstring("aaaaaa"));
+    // System.out.println("\tabcde: " + longestNonrepeatingSubstring("abcde"));
+    // System.out.println("\tabcda: " + longestNonrepeatingSubstring("abcda"));
+
+    System.out.println("Задача №8: ");
+    System.out.println("\t2: " + convertToRoman(2));
+    System.out.println("\t12: " + convertToRoman(12));
+    System.out.println("\t16: " + convertToRoman(16));
+    System.out.println("\t2765: " + convertToRoman(2765));
+    System.out.println("\t3999: " + convertToRoman(3999));
     // System.out.println("\t: \t" + ());
   }
   private int bell(int n) {
@@ -223,5 +236,41 @@ public class Practic6 {
       num += 1;
     }
     return seq[n - 1];
+  }
+  // private String longestNonrepeatingSubstring(String line) {
+
+  // }
+  private String converter(String[] convert, int figure) {
+    switch (figure) {
+      case 4:
+        return convert[0] + convert[1];
+      case 5:
+        return convert[1];
+      case 9:
+        return convert[0] + convert[2];
+    }
+    if (1 <= figure && figure <= 3) {
+      return convert[0].repeat(figure);
+    }
+    if (6 <= figure && figure <= 8) {
+      return convert[1] + convert[0].repeat(figure - 5);
+    }
+    return "";
+  }
+  private String convertToRoman(int numberArabic) {
+    String result = "";
+    String[][] convert = new String[][]{{"I", "V", "X"}, {"X", "L", "C"}, {"C", "D", "M"}};
+    String number = String.valueOf(numberArabic);
+    int index = 0;
+
+    for (int i = number.length() - 1; i >= 0; i -= 1) {
+      if (index > 2) {
+          result = "M".repeat(Integer.valueOf(number.substring(i, i + 1))) + result;
+          break;
+      }
+      result = converter(convert[index], Integer.valueOf(number.substring(i, i + 1))) + result;
+      index += 1;
+    }
+    return result;
   }
 }
