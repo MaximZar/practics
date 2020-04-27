@@ -34,11 +34,11 @@ public class Practic6 {
     System.out.println("\t9: \t" + ulam(9));
     System.out.println("\t206: \t" + ulam(206));
 
-    // System.out.println("Задача №7: ");
-    // System.out.println("\tabcabcbb: " + longestNonrepeatingSubstring("abcabcbb"));
-    // System.out.println("\taaaaaa: " + longestNonrepeatingSubstring("aaaaaa"));
-    // System.out.println("\tabcde: " + longestNonrepeatingSubstring("abcde"));
-    // System.out.println("\tabcda: " + longestNonrepeatingSubstring("abcda"));
+    System.out.println("Задача №7: ");
+    System.out.println("\tabcabcbb: " + longestNonrepeatingSubstring("abcabcbb"));
+    System.out.println("\taaaaaa: " + longestNonrepeatingSubstring("aaaaaa"));
+    System.out.println("\tabcde: " + longestNonrepeatingSubstring("abcde"));
+    System.out.println("\tabcda: " + longestNonrepeatingSubstring("abcda"));
 
     System.out.println("Задача №8: ");
     System.out.println("\t2: " + convertToRoman(2));
@@ -248,9 +248,26 @@ public class Practic6 {
     }
     return seq[n - 1];
   }
-  // private String longestNonrepeatingSubstring(String line) {
-
-  // }
+  private String longestNonrepeatingSubstring(String line) {
+    // Формулировка у задания сложновата 
+    // Согласно примерам к заданию я вывел ответ на такую постановку задачи:
+    // необходимо найти самую длинную последовательность с неповторяющимися символами
+    String nonRepeat = "";
+    String inWork = "";
+    int index = 1;
+    for (int i = 0; i < line.length(); i += 1) {
+      String symbol = line.substring(i, i + 1);
+      if (!inWork.contains(symbol)) {
+        inWork += symbol;
+      } else {
+        nonRepeat = inWork.length() > nonRepeat.length() ? inWork : nonRepeat;
+        inWork = "";
+        i = index;
+        index += 1;
+      }
+    }
+    return nonRepeat.length() == 0 ? inWork : nonRepeat;
+  }
   private String converter(String[] convert, int figure) {
     switch (figure) {
       case 4:
