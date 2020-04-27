@@ -52,7 +52,12 @@ public class Practic6 {
     System.out.println("\t18 / 17 = 2: " + formula("18 / 17 = 2"));
     System.out.println("\t16 * 10 = 160 = 14 + 120: " + formula("16 * 10 = 160 = 14 + 120"));
     
-    // System.out.println("\t: \t" + ());
+    System.out.println("Задача №10: ");
+    System.out.println("\t11211230: \t" + palindromedescendant(11211230));
+    System.out.println("\t13001120: \t" + palindromedescendant(13001120));
+    System.out.println("\t23336014: \t" + palindromedescendant(23336014));
+    System.out.println("\t23336013: \t" + palindromedescendant(23336013));
+    System.out.println("\t11: \t" + palindromedescendant(11));
   }
   private int bell(int n) {
     //решено с помощью треугольника Пирса
@@ -310,5 +315,29 @@ public class Practic6 {
       }
     }
     return true;
+  }
+  private boolean isPalindrome(String number) {
+    String firstHalf = number.substring(0, number.length() / 2);
+    String secondHalf = "";
+    for (int i = number.length() - 1; i >= number.length() / 2; i -= 1) {
+      secondHalf += String.valueOf(number.charAt(i));
+    }
+    return firstHalf.equals(new StringBuilder(secondHalf).reverse().toString());
+  }
+  private boolean palindromedescendant(int number) {
+    String num = String.valueOf(number);
+    while (num.length() > 1) {
+      if (isPalindrome(num)) {
+        return true;
+      }
+      String digit = "";
+      for (int i = 0; i < num.length(); i += 2) {
+        int num1 = Integer.valueOf(num.substring(i, i + 1));
+        int num2 = Integer.valueOf(num.substring(i + 1, i + 2));
+        digit += String.valueOf(num1 + num2);
+      }
+      num = digit;
+    }
+    return false;
   }
 }
