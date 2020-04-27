@@ -28,6 +28,11 @@ public class Practic6 {
     System.out.println("\tWhy You Will Probably Pay More for Your Christmas Tree This Year: " + getHashTags("Why You Will Probably Pay More for Your Christmas Tree This Year"));
     System.out.println("\tHey Parents, Surprise, Fruit Juice Is Not Fruit: " + getHashTags("Hey Parents, Surprise, Fruit Juice Is Not Fruit"));
     System.out.println("\tVisualizing Science: " + getHashTags("Visualizing Science"));
+    
+    System.out.println("Задача №6: ");
+    System.out.println("\t4: \t" + ulam(4));
+    System.out.println("\t9: \t" + ulam(9));
+    System.out.println("\t206: \t" + ulam(206));
     // System.out.println("\t: \t" + ());
   }
   private int bell(int n) {
@@ -197,5 +202,26 @@ public class Practic6 {
     }
     result = result.substring(0, result.length() - 1) + "]";
     return result;
+  }
+  private int ulam(int n) {
+    int[] seq = new int[n];
+    seq[0] = 1;
+    seq[1] = 2;
+    int num = 3;
+    for (int i = 2; i < n; i += 1) {
+      int counter = 0;
+      for (int j = 0; j < i; j += 1) {
+        for (int k = j + 1; k < i; k += 1) {
+          if (seq[j] + seq[k] == num) counter += 1;
+        }
+      }
+      if (counter == 1) {
+        seq[i] = num;
+      } else {
+        i -= 1;
+      }
+      num += 1;
+    }
+    return seq[n - 1];
   }
 }
