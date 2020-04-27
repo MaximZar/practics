@@ -23,6 +23,11 @@ public class Practic6 {
     System.out.println("\thttps://edabit.com?a=1&b=2&a=2: " + stripUrlParams("https://edabit.com?a=1&b=2&a=2"));
     System.out.println("\thttps://edabit.com?a=1&b=2&a=2, ['b']: " + stripUrlParams("https://edabit.com?a=1&b=2&a=2", new String[]{"b"}));
     System.out.println("\thttps://edabit.com, ['b']: " + stripUrlParams("https://edabit.com", new String[]{ "b" }));
+    
+    System.out.println("Задача №5: ");
+    System.out.println("\tWhy You Will Probably Pay More for Your Christmas Tree This Year: " + getHashTags("Why You Will Probably Pay More for Your Christmas Tree This Year"));
+    System.out.println("\tHey Parents, Surprise, Fruit Juice Is Not Fruit: " + getHashTags("Hey Parents, Surprise, Fruit Juice Is Not Fruit"));
+    System.out.println("\tVisualizing Science: " + getHashTags("Visualizing Science"));
     // System.out.println("\t: \t" + ());
   }
   private int bell(int n) {
@@ -158,5 +163,39 @@ public class Practic6 {
     }
     result = result.charAt(result.length() - 1) == '&' ? result.substring(0, result.length() - 1) : result;
     return site.substring(0, site.indexOf("?") + 1) + result;
+  }
+  private String getHashTags(String line) {
+    String[] all = line.split(" ");
+    String[] hashTags = new String[]{"", "", ""};
+    //удалям знаки препинания
+    for (int i = 0; i < all.length; i += 1) {
+      int split = findSplitter(all[i]);
+      if (split != -1) {
+        all[i] = all[i].substring(0, split) + all[i].substring(split + 1);
+      }
+      all[i] = all[i].toLowerCase();
+      if (all[i].length() > hashTags[0].length()) {
+        hashTags[2] = hashTags[1];
+        hashTags[1] = hashTags[0];
+        hashTags[0] = all[i];
+        continue;
+      }
+      if (all[i].length() > hashTags[1].length()) {
+        hashTags[2] = hashTags[1];
+        hashTags[1] = all[i];
+        continue;
+      }
+      if (all[i].length() > hashTags[2].length()) {
+        hashTags[2] = all[i];
+      }
+    }
+    String result = "[";
+    for (int i = 0; i < 3; i += 1) {
+      if (!hashTags[i].equals("")) {
+        result += "\"#" + hashTags[i] + "\", ";
+      }
+    }
+    result = result.substring(0, result.length() - 1) + "]";
+    return result;
   }
 }
