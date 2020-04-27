@@ -20,6 +20,9 @@ public class Practics {
             case 5:
                 new Practic5();
                 break;
+            case 5:
+                new Practic6();
+                break;    
             default:
                 System.out.println("Такой практики нет"); 
         }
